@@ -26,8 +26,9 @@ class SelectDateField extends StatelessWidget {
           readOnly: true,
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: TextStyle(
-              color: theme.colorScheme.tertiary,
+            hintStyle: theme.textTheme.labelSmall?.copyWith(
+              fontSize: 18,
+              color: theme.colorScheme.secondary,
             ),
             filled: true,
             contentPadding: EdgeInsets.all(20),

@@ -12,7 +12,7 @@ class SearchScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              color: theme.colorScheme.tertiaryFixed,
+              color: theme.colorScheme.primary,
               padding: EdgeInsets.all(6),
               child: Row(
                 children: [
@@ -23,6 +23,7 @@ class SearchScreen extends StatelessWidget {
                     icon: Image.asset(
                       'images/home/close.png',
                       scale: 1.8,
+                      color: theme.colorScheme.surface,
                     ),
                   ),
                   Expanded(

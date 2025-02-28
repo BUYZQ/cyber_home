@@ -14,6 +14,7 @@ class WelcomeThreeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
+                textAlign: TextAlign.center,
                 '3 уровня освоения профессий',
                 style: theme.textTheme.titleSmall?.copyWith(
                   fontSize: 30,

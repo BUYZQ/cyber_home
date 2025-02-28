@@ -14,6 +14,7 @@ class WelcomeTwoScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
+                textAlign: TextAlign.center,
                 'Почему выбирают CyberED?',
                 style: theme.textTheme.titleSmall?.copyWith(
                   fontSize: 30,

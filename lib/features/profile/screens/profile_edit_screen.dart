@@ -26,7 +26,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             slivers: [
               SliverAppBar(
                 automaticallyImplyLeading: false,
-                backgroundColor: theme.colorScheme.tertiaryFixed,
                 floating: false,
                 pinned: true,
                 scrolledUnderElevation: 0,
@@ -40,20 +39,27 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        icon: Icon(Icons.arrow_back_ios),
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: theme.colorScheme.surface,
+                        ),
                       ),
                       Text(
                         'Профиль',
                         style: theme.textTheme.titleSmall?.copyWith(
                           fontSize: 30,
+                          color: theme.colorScheme.surface,
                         ),
                       ),
                       IconButton(
                         onPressed: () {
                           Navigator.of(context).pushNamed('/settings');
                         },
-                        icon:
-                            Image.asset('images/home/settings.png', scale: 1.8),
+                        icon: Image.asset(
+                          'images/home/settings.png',
+                          scale: 1.8,
+                          color: theme.colorScheme.surface,
+                        ),
                       ),
                     ],
                   ),

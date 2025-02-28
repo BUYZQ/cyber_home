@@ -20,7 +20,6 @@ class _ContactDataScreenState extends State<ContactDataScreen> {
             slivers: [
               SliverAppBar(
                 automaticallyImplyLeading: false,
-                backgroundColor: theme.colorScheme.tertiaryFixed,
                 floating: false,
                 pinned: true,
                 scrolledUnderElevation: 0,
@@ -34,19 +33,28 @@ class _ContactDataScreenState extends State<ContactDataScreen> {
                         onPressed: () {
                           Scaffold.of(context).openDrawer();
                         },
-                        icon: Image.asset('images/home/menu.png', scale: 1.8),
+                        icon: Image.asset(
+                          'images/home/menu.png',
+                          scale: 1.8,
+                          color: theme.colorScheme.surface,
+                        ),
                       ),
                       Text(
                         'Контактные данные',
                         style: theme.textTheme.titleSmall?.copyWith(
                           fontSize: 25,
+                          color: theme.colorScheme.surface,
                         ),
                       ),
                       IconButton(
                         onPressed: () {
                           Navigator.of(context).pushNamed('/settings');
                         },
-                        icon: Image.asset('images/home/settings.png', scale: 1.8),
+                        icon: Image.asset(
+                          'images/home/settings.png',
+                          scale: 1.8,
+                          color: theme.colorScheme.surface,
+                        ),
                       ),
                     ],
                   ),

@@ -21,7 +21,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             slivers: [
               SliverAppBar(
                 automaticallyImplyLeading: false,
-                backgroundColor: theme.colorScheme.tertiaryFixed,
                 floating: false,
                 pinned: true,
                 scrolledUnderElevation: 0,
@@ -35,12 +34,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        icon: Icon(Icons.arrow_back_ios),
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: theme.colorScheme.surface,
+                        ),
                       ),
                       Text(
                         'Настройки',
                         style: theme.textTheme.titleSmall?.copyWith(
                           fontSize: 30,
+                          color: theme.colorScheme.surface,
                         ),
                       ),
                       SizedBox(width: 30),

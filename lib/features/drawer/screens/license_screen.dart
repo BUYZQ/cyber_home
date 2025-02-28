@@ -23,7 +23,6 @@ class _LicenseScreenState extends State<LicenseScreen> {
             slivers: [
               SliverAppBar(
                 automaticallyImplyLeading: false,
-                backgroundColor: theme.colorScheme.tertiaryFixed,
                 floating: false,
                 pinned: true,
                 scrolledUnderElevation: 0,
@@ -37,20 +36,28 @@ class _LicenseScreenState extends State<LicenseScreen> {
                         onPressed: () {
                           Scaffold.of(context).openDrawer();
                         },
-                        icon: Image.asset('images/home/menu.png', scale: 1.8),
+                        icon: Image.asset(
+                          'images/home/menu.png',
+                          scale: 1.8,
+                          color: theme.colorScheme.surface,
+                        ),
                       ),
                       Text(
                         'Лицензия',
                         style: theme.textTheme.titleSmall?.copyWith(
                           fontSize: 30,
+                          color: theme.colorScheme.surface,
                         ),
                       ),
                       IconButton(
                         onPressed: () {
                           Navigator.of(context).pushNamed('/settings');
                         },
-                        icon:
-                            Image.asset('images/home/settings.png', scale: 1.8),
+                        icon: Image.asset(
+                          'images/home/settings.png',
+                          scale: 1.8,
+                          color: theme.colorScheme.surface,
+                        ),
                       ),
                     ],
                   ),

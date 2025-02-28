@@ -39,75 +39,114 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Form(
-      key: _formKey,
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              spacing: 10,
-              children: [
-                Text(
-                  'Авторизация',
-                  style: theme.textTheme.titleSmall?.copyWith(
-                    fontSize: 40,
-                  ),
-                ),
-                SizedBox(height: 30),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: SizedBox(
-                            height: 60,
-                            child: MySelectButton(
-                              title: 'Обучающийся',
-                              isSelected: _selected == 'Обучающийся',
-                              onPressed: () => _onSelect('Обучающийся'),
+    return Container(
+      height: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            const Color(0xFF1A088D),
+            const Color(0xFF3314F1),
+            const Color(0xFFFD6342),
+          ],
+          stops: [0.1, 0.3, 0.8],
+        ),
+      ),
+      child: Form(
+        key: _formKey,
+        child: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              double horizontalPadding = 20.0;
+              if (constraints.maxWidth > 800) {
+                horizontalPadding = 250.0;
+              } else if (constraints.maxWidth > 600) {
+                horizontalPadding = 100.0;
+              }
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                child: SingleChildScrollView(
+                  child: Center(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                        maxWidth: 600,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        spacing: 10,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Text(
+                              'Авторизация',
+                              style: theme.textTheme.titleSmall?.copyWith(
+                                fontSize: 40,
+                                color: theme.colorScheme.surface,
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: SizedBox(
-                            height: 60,
-                            child: MySelectButton(
-                              title: 'Сотрудник',
-                              isSelected: _selected == 'Сотрудник',
-                              onPressed: () => _onSelect('Сотрудник'),
+                          SizedBox(height: 30),
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 60,
+                                      child: MySelectButton(
+                                        title: 'Обучающийся',
+                                        isSelected: _selected == 'Обучающийся',
+                                        onPressed: () => _onSelect('Обучающийся'),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 60,
+                                      child: MySelectButton(
+                                        title: 'Сотрудник',
+                                        isSelected: _selected == 'Сотрудник',
+                                        onPressed: () => _onSelect('Сотрудник'),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              _selected == 'Обучающийся'
+                                  ? LoginStudentBlock(
+                                emailController: _emailController,
+                                passwordController: _passwordController,
+                                formKey: _formKey,
+                              )
+                                  : LoginEmployeeBlock(
+                                emailController: _emailController,
+                                passwordController: _passwordController,
+                                formKey: _formKey,
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 100),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: SizedBox(
+                              height: 55,
+                              width: double.infinity,
+                              child: MyButton(
+                                foregroundColor: theme.colorScheme.onSurface,
+                                title: 'Регистрация',
+                                onPressed: widget.toggleScreen,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    _selected == 'Обучающийся'
-                        ? LoginStudentBlock(
-                            emailController: _emailController,
-                            passwordController: _passwordController,
-                            formKey: _formKey,
-                          )
-                        : LoginEmployeeBlock(
-                            emailController: _emailController,
-                            passwordController: _passwordController,
-                            formKey: _formKey,
-                          ),
-                  ],
-                ),
-                SizedBox(height: 100),
-                SizedBox(
-                  height: 55,
-                  width: double.infinity,
-                  child: MyButton(
-                    backgroundColor: theme.colorScheme.tertiary,
-                    foregroundColor: theme.colorScheme.onSurface,
-                    title: 'Регистрация',
-                    onPressed: widget.toggleScreen,
                   ),
                 ),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),

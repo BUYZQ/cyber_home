@@ -24,7 +24,7 @@ class MyButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius),
         ),
-        backgroundColor: backgroundColor ?? theme.primaryColor,
+        backgroundColor: backgroundColor ?? theme.colorScheme.surface,
         foregroundColor: foregroundColor ?? theme.colorScheme.onPrimary,
       ),
       onPressed: onPressed,

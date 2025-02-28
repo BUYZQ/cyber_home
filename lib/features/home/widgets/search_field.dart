@@ -16,7 +16,7 @@ class SearchField extends StatelessWidget {
       cursorColor: theme.colorScheme.onSurface,
       decoration: InputDecoration(
         filled: true,
-        fillColor: theme.colorScheme.tertiary,
+        fillColor: theme.colorScheme.surface,
         hintText: 'Поиск информации',
         hintStyle: TextStyle(
           color: theme.colorScheme.tertiaryFixed,

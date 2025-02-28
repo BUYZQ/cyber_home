@@ -52,7 +52,6 @@ class _HomeScreenState extends State<HomeScreen>
             slivers: [
               SliverAppBar(
                 automaticallyImplyLeading: false,
-                backgroundColor: theme.colorScheme.tertiaryFixed,
                 floating: false,
                 pinned: true,
                 scrolledUnderElevation: 0,
@@ -66,19 +65,28 @@ class _HomeScreenState extends State<HomeScreen>
                         onPressed: () {
                           Scaffold.of(context).openDrawer();
                         },
-                        icon: Image.asset('images/home/menu.png', scale: 1.8),
+                        icon: Image.asset(
+                          'images/home/menu.png',
+                          scale: 1.8,
+                          color: theme.colorScheme.surface,
+                        ),
                       ),
                       Text(
                         'Главная',
                         style: theme.textTheme.titleSmall?.copyWith(
                           fontSize: 38,
+                          color: theme.colorScheme.surface,
                         ),
                       ),
                       IconButton(
                         onPressed: () {
                           Navigator.of(context).pushNamed('/settings');
                         },
-                        icon: Image.asset('images/home/settings.png', scale: 1.8),
+                        icon: Image.asset(
+                          'images/home/settings.png',
+                          scale: 1.8,
+                          color: theme.colorScheme.surface,
+                        ),
                       ),
                     ],
                   ),

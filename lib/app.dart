@@ -7,6 +7,7 @@ class CyberApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return MaterialApp(
       title: 'Cyber Home',
       theme: ThemeData(
@@ -24,13 +25,17 @@ class CyberApp extends StatelessWidget {
             fontWeight: FontWeight.w400,
           ),
         ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Color(0xff3314F1),
+        ),
         colorScheme: ColorScheme.light(
           surface: Color(0xffFFFFFF),
           onSurface: Color(0xff000000),
-          primary: Color(0xff008dff),
+          primary: Color(0xff3314F1),
           onPrimary: Color(0xffFFFFFF),
           tertiary: Color(0xffD9D9D9),
           tertiaryFixed: Color(0xff9B9B9B),
+          secondary: Color(0xff8985A7),
           error: Color(0xffFD6342),
         ),
         useMaterial3: true,

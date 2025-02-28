@@ -19,7 +19,10 @@ class MyDropdownField extends StatelessWidget {
       validator: validator,
       hint: Text(
         hint,
-        style: TextStyle(color: theme.colorScheme.tertiary),
+        style: theme.textTheme.labelSmall?.copyWith(
+          fontSize: 18,
+          color: theme.colorScheme.secondary,
+        ),
       ),
       decoration: InputDecoration(
         filled: true,
