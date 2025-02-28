@@ -7,26 +7,28 @@ class WelcomeTwoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: 130.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text(
-              'Заголовок',
-              style: theme.textTheme.titleSmall?.copyWith(
-                fontSize: 30,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 130.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                'Почему выбирают CyberED?',
+                style: theme.textTheme.titleSmall?.copyWith(
+                  fontSize: 30,
+                ),
               ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              textAlign: TextAlign.center,
-              'Текст с пояснением чем занимается компании и какие курсы преподаёт. Также пояснение что чем удобно и что даёт приложение',
-              style: theme.textTheme.bodySmall?.copyWith(
-                fontSize: 20,
+              SizedBox(height: 10),
+              Text(
+                textAlign: TextAlign.center,
+                'Мы 7 лет обучаем на практике у лучших экспертов России',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  fontSize: 20,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

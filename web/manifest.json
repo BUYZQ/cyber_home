@@ -1,6 +1,6 @@
 {
-    "name": "cyber_app",
-    "short_name": "cyber_app",
+    "name": "Cyber Home",
+    "short_name": "Cyber Home",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

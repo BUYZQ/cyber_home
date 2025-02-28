@@ -3,22 +3,53 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class AuthService {
   final _supabaseClient = Supabase.instance.client;
 
-  Future<AuthResponse> signUp({
+  Future<AuthResponse> registerStudent({
     required String email,
     required String password,
-    required String username,
+    required String fullName,
+    required String birthdate,
+    required String gender
   }) async {
     try {
       final response = await _supabaseClient.auth.signUp(
           email: email,
           password: password,
           data: {
-            'username': username,
-          }
+            'fullName': fullName,
+            'birthdate': birthdate,
+            'gender': gender,
+          },
       );
       return response;
     } catch(e) {
-      throw e;
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<AuthResponse> registerEmployee({
+    required String email,
+    required String password,
+    required String fullName,
+    required String birthdate,
+    required String gender,
+    required String corporateEmail,
+    required String position,
+  }) async {
+    try {
+      final response = await _supabaseClient.auth.signUp(
+        email: email,
+        password: password,
+        data: {
+          'fullName': fullName,
+          'birthdate': birthdate,
+          'gender': gender,
+          'corporate_email': corporateEmail,
+          'position': position,
+        },
+      );
+      return response;
+    } catch(e) {
+      throw Exception(e.toString());
     }
   }
 

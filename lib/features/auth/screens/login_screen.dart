@@ -1,7 +1,7 @@
+import 'package:cyber_app/features/auth/widgets/login_employee_block.dart';
+import 'package:cyber_app/features/auth/widgets/login_student_block.dart';
 import 'package:cyber_app/features/auth/widgets/my_select_button.dart';
-import 'package:cyber_app/utils/validators.dart';
 import 'package:cyber_app/widgets/my_button.dart';
-import 'package:cyber_app/widgets/my_text_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,7 +17,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   String _selected = 'Обучающийся';
   final _formKey = GlobalKey<FormState>();
 
@@ -83,76 +82,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
-                    Material(
-                      color: theme.colorScheme.tertiary,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(0),
-                        bottomRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-                        child: Column(
-                          spacing: 10,
-                          children: [
-                            MyTextField(
-                              controller: _emailController,
-                              hint: 'Email',
-                              validator: Validators.validateEmail,
-                            ),
-                            MyTextField(
-                              controller: _passwordController,
-                              hint: 'Password',
-                              isPassword: true,
-                              validator: Validators.validatePasswordComplexity,
-                            ),
-                            SizedBox(height: 30),
-                            InkWell(
-                              borderRadius: BorderRadius.circular(10),
-                              onTap: () {
-                                Navigator.of(context).pushNamed('/change_password');
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 6),
-                                child: Text(
-                                  'Забыли пароль',
-                                  style: theme.textTheme.labelSmall?.copyWith(
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                              borderRadius: BorderRadius.circular(10),
-                              onTap: () {
-                                Navigator.of(context).pushNamed('/change_email');
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 6),
-                                child: Text(
-                                  'Изменить адрес Эл. Почты',
-                                  style: theme.textTheme.labelSmall?.copyWith(
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 55,
-                              width: double.infinity,
-                              child: MyButton(
-                                backgroundColor: theme.colorScheme.surface,
-                                foregroundColor: theme.colorScheme.onSurface,
-                                title: 'Войти',
-                                onPressed: () {
-                                 if(_formKey.currentState!.validate()) {}
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    _selected == 'Обучающийся'
+                        ? LoginStudentBlock(
+                            emailController: _emailController,
+                            passwordController: _passwordController,
+                            formKey: _formKey,
+                          )
+                        : LoginEmployeeBlock(
+                            emailController: _emailController,
+                            passwordController: _passwordController,
+                            formKey: _formKey,
+                          ),
                   ],
                 ),
                 SizedBox(height: 100),
