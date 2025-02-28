@@ -11,7 +11,6 @@ class WelcomeRootScreen extends StatefulWidget {
 }
 
 class _WelcomeRootScreenState extends State<WelcomeRootScreen> {
-
   final _pageController = PageController();
   int _currentPageIndex = 0;
 
@@ -25,105 +24,98 @@ class _WelcomeRootScreenState extends State<WelcomeRootScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          double horizontalPadding = 20.0;
-          if (constraints.maxWidth > 800) {
-            horizontalPadding = 250.0;
-          } else if (constraints.maxWidth > 600) {
-            horizontalPadding = 100.0;
-          }
-          return Stack(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                child: PageView(
-                  controller: _pageController,
-                  children: _screens,
-                  onPageChanged: (index) {
-                    setState(() {
-                      _currentPageIndex = index;
-                    });
-                  },
-                ),
-              ),
-              Center(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minWidth: constraints.maxHeight,
-                    maxWidth: 600,
-                  ),
-                  child: Positioned(
-                    bottom: 20,
-                    left: 20,
-                    right: 20,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Material(
-                          borderRadius: BorderRadius.circular(100),
-                          color: theme.colorScheme.tertiary,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(100),
-                            onTap: () {
-                              _pageController.previousPage(
-                                duration: Duration(milliseconds: 600),
-                                curve: Curves.ease,
-                              );
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 60,
-                              width: 60,
-                              child:  Image.asset('images/сommon/icons/left.png'),
-                            ),
-                          ),
-                        ),
-                        Row(
-                          spacing: 10,
-                          children: [
-                            ...List.generate(3, (index) {
-                              return  CircleAvatar(
-                                radius: 7,
-                                backgroundColor: index == _currentPageIndex
-                                    ? theme.colorScheme.tertiaryFixed
-                                    : theme.colorScheme.tertiary,
-                              );
-                            }),
-                          ],
-                        ),
-                        Material(
-                          borderRadius: BorderRadius.circular(100),
-                          color: theme.colorScheme.tertiary,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(100),
-                            onTap: () {
-                              _pageController.nextPage(
-                                duration: Duration(milliseconds: 600),
-                                curve: Curves.ease,
-                              );
-                              if(_pageController.page == _screens.length - 1) {
-                                Navigator.of(context).pushReplacementNamed('/auth');
-                              }
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 60,
-                              width: 60,
-                              child: Image.asset('images/сommon/icons/right.png')
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          );
+      body: LayoutBuilder(builder: (context, constraints) {
+        double horizontalPadding = 0.0;
+        if (constraints.maxWidth <= 600) {
+          horizontalPadding = 20.0;
         }
-      ),
+        return Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+              child: PageView(
+                controller: _pageController,
+                children: _screens,
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentPageIndex = index;
+                  });
+                },
+              ),
+            ),
+            Positioned(
+              bottom: 20,
+              left: 20,
+              right: 20,
+              child: Center(
+                child: Container(
+                  constraints: const BoxConstraints(maxWidth: 500),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Material(
+                        borderRadius: BorderRadius.circular(100),
+                        color: theme.colorScheme.tertiary,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(100),
+                          onTap: () {
+                            _pageController.previousPage(
+                              duration: Duration(milliseconds: 600),
+                              curve: Curves.ease,
+                            );
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 60,
+                            width: 60,
+                            child: Image.asset('images/сommon/icons/left.png'),
+                          ),
+                        ),
+                      ),
+                      Row(
+                        spacing: 10,
+                        children: [
+                          ...List.generate(3, (index) {
+                            return CircleAvatar(
+                              radius: 7,
+                              backgroundColor: index == _currentPageIndex
+                                  ? theme.colorScheme.tertiaryFixed
+                                  : theme.colorScheme.tertiary,
+                            );
+                          }),
+                        ],
+                      ),
+                      Material(
+                        borderRadius: BorderRadius.circular(100),
+                        color: theme.colorScheme.tertiary,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(100),
+                          onTap: () {
+                            _pageController.nextPage(
+                              duration: Duration(milliseconds: 600),
+                              curve: Curves.ease,
+                            );
+                            if (_pageController.page == _screens.length - 1) {
+                              Navigator.of(context).pushReplacementNamed('/auth');
+                            }
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 60,
+                            width: 60,
+                            child: Image.asset('images/сommon/icons/right.png'),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }

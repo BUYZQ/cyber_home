@@ -55,11 +55,9 @@ class _WelcomeHomeScreenState extends State<WelcomeHomeScreen>
             ),
             child: LayoutBuilder(
               builder: (context, constraints) {
-                double horizontalPadding = 20.0;
-                if (constraints.maxWidth > 800) {
-                  horizontalPadding = 250.0;
-                } else if (constraints.maxWidth > 600) {
-                  horizontalPadding = 100.0;
+                double horizontalPadding = 0.0;
+                if (constraints.maxWidth <= 600) {
+                  horizontalPadding = 20.0;
                 }
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: horizontalPadding),

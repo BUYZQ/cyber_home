@@ -71,118 +71,134 @@ class _RegisterScreenState extends State<RegisterScreen> {
       child: Form(
         key: _formKey,
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                spacing: 10,
-                children: [
-                  SizedBox(height: 10),
-                  Text(
-                    'Регистрация',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontSize: 40,
-                      color: theme.colorScheme.surface,
-                    ),
-                  ),
-                  SizedBox(height: 30),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: SizedBox(
-                              height: 60,
-                              child: MySelectButton(
-                                title: 'Обучающийся',
-                                isSelected: _selectedStatus == 'Обучающийся',
-                                onPressed: () => _onSelect('Обучающийся'),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: SizedBox(
-                              height: 60,
-                              child: MySelectButton(
-                                title: 'Сотрудник',
-                                onPressed: () => _onSelect('Сотрудник'),
-                                isSelected: _selectedStatus == 'Сотрудник',
-                              ),
-                            ),
-                          ),
-                        ],
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              double horizontalPadding = 0.0;
+              if (constraints.maxWidth <= 600) {
+                horizontalPadding = 20.0;
+              }
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                child: SingleChildScrollView(
+                  child: Center(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                        maxWidth: 600,
                       ),
-                      ClipRRect(
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                          child: Container(
-                            decoration: BoxDecoration(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        spacing: 10,
+                        children: [
+                          SizedBox(height: 10),
+                          Text(
+                            'Регистрация',
+                            style: theme.textTheme.titleSmall?.copyWith(
+                              fontSize: 40,
                               color: theme.colorScheme.surface,
-                              borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(20),
-                                bottomLeft: Radius.circular(20),
-                              ),
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Colors.white.withValues(alpha: 0.2),
-                                  Colors.white.withValues(alpha: 0.3),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 60,
+                                      child: MySelectButton(
+                                        title: 'Обучающийся',
+                                        isSelected: _selectedStatus == 'Обучающийся',
+                                        onPressed: () => _onSelect('Обучающийся'),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 60,
+                                      child: MySelectButton(
+                                        title: 'Сотрудник',
+                                        onPressed: () => _onSelect('Сотрудник'),
+                                        isSelected: _selectedStatus == 'Сотрудник',
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
-                            ),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-                                child: _selectedStatus == 'Обучающийся'
-                                    ? StudentBlock(
-                                        fullNameController: _fullNameController,
-                                        dateController: _dateController,
-                                        emailController: _emailController,
-                                        selectedGender: _selectedGender,
-                                        passwordController: _passwordController,
-                                        confirmPasswordController:
-                                            _confirmPasswordController,
-                                        formKey: _formKey,
-                                        selectedDate: _selectedDate,
-                                        selectDate: _selectDate,
-                                      )
-                                    : EmployeeBlock(
-                                        fullNameController: _fullNameController,
-                                        dateController: _dateController,
-                                        emailController: _emailController,
-                                        selectedGender: _selectedGender,
-                                        passwordController: _passwordController,
-                                        confirmPasswordController: _confirmPasswordController,
-                                        workEmailController: _workEmailController,
-                                        positionController: _positionController,
-                                        formKey: _formKey,
-                                        selectedDate: _selectedDate,
-                                        selectDate: _selectDate,
+                              ClipRRect(
+                                child: BackdropFilter(
+                                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: theme.colorScheme.surface,
+                                      borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(20),
+                                        bottomLeft: Radius.circular(20),
                                       ),
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: [
+                                          Colors.white.withValues(alpha: 0.2),
+                                          Colors.white.withValues(alpha: 0.3),
+                                        ],
+                                      ),
+                                    ),
+                                    child: Material(
+                                      color: Colors.transparent,
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                                        child: _selectedStatus == 'Обучающийся'
+                                            ? StudentBlock(
+                                                fullNameController: _fullNameController,
+                                                dateController: _dateController,
+                                                emailController: _emailController,
+                                                selectedGender: _selectedGender,
+                                                passwordController: _passwordController,
+                                                confirmPasswordController:
+                                                    _confirmPasswordController,
+                                                formKey: _formKey,
+                                                selectedDate: _selectedDate,
+                                                selectDate: _selectDate,
+                                              )
+                                            : EmployeeBlock(
+                                                fullNameController: _fullNameController,
+                                                dateController: _dateController,
+                                                emailController: _emailController,
+                                                selectedGender: _selectedGender,
+                                                passwordController: _passwordController,
+                                                confirmPasswordController: _confirmPasswordController,
+                                                workEmailController: _workEmailController,
+                                                positionController: _positionController,
+                                                formKey: _formKey,
+                                                selectedDate: _selectedDate,
+                                                selectDate: _selectDate,
+                                              ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
+                            ],
+                          ),
+                          SizedBox(height: 30),
+                          SizedBox(
+                            height: 55,
+                            width: double.infinity,
+                            child: MyButton(
+                              foregroundColor: theme.colorScheme.onSurface,
+                              title: 'Авторизация',
+                              onPressed: widget.toggleScreen,
                             ),
                           ),
-                        ),
+                          SizedBox(height: 10),
+                        ],
                       ),
-                    ],
-                  ),
-                  SizedBox(height: 30),
-                  SizedBox(
-                    height: 55,
-                    width: double.infinity,
-                    child: MyButton(
-                      foregroundColor: theme.colorScheme.onSurface,
-                      title: 'Авторизация',
-                      onPressed: widget.toggleScreen,
                     ),
                   ),
-                  SizedBox(height: 10),
-                ],
-              ),
-            ),
+                ),
+              );
+            }
           ),
         ),
       ),
