@@ -38,6 +38,8 @@ dependencies:
   email_validator: ^3.0.0
   flutter_launcher_icons: ^0.14.3
   carousel_slider: ^5.0.0
+  image_picker: ^1.1.2
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
@@ -73,7 +75,7 @@ flutter:
      - images/home/
      - images/profile/
      - images/settings/
-
+     - images/persons/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

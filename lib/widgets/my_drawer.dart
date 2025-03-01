@@ -1,4 +1,6 @@
+import 'package:cyber_app/providers/user_image_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyDrawer extends StatelessWidget {
   final String currentScreen;
@@ -10,6 +12,7 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imageProvider = Provider.of<UserImageProvider>(context);
     final theme = Theme.of(context);
     return Drawer(
       child: Stack(
@@ -18,7 +21,7 @@ class MyDrawer extends StatelessWidget {
             children: [
               Container(
                 height: 150,
-                color: theme.colorScheme.tertiary,
+                color: theme.colorScheme.primary,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -30,8 +33,11 @@ class MyDrawer extends StatelessWidget {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Image.asset('images/home/close.png',
-                                scale: 1.6),
+                            icon: Image.asset(
+                              'images/home/close.png',
+                              scale: 1.6,
+                              color: theme.colorScheme.surface,
+                            ),
                           ),
                         ),
                       ],
@@ -194,12 +200,25 @@ class MyDrawer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: 120,
                   height: 120,
+                  width: 120,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    color: theme.colorScheme.tertiaryFixed,
+                    color: theme.colorScheme.surface,
                   ),
+                  child: imageProvider.image == null
+                      ? Icon(
+                          Icons.person,
+                          size: 100,
+                          color: theme.colorScheme.primaryFixed,
+                        )
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.file(
+                            imageProvider.image!,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                 ),
               ],
             ),

@@ -25,23 +25,16 @@ class _WelcomeRootScreenState extends State<WelcomeRootScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       body: LayoutBuilder(builder: (context, constraints) {
-        double horizontalPadding = 0.0;
-        if (constraints.maxWidth <= 600) {
-          horizontalPadding = 20.0;
-        }
         return Stack(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-              child: PageView(
-                controller: _pageController,
-                children: _screens,
-                onPageChanged: (index) {
-                  setState(() {
-                    _currentPageIndex = index;
-                  });
-                },
-              ),
+            PageView(
+              controller: _pageController,
+              children: _screens,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentPageIndex = index;
+                });
+              },
             ),
             Positioned(
               bottom: 20,
@@ -54,23 +47,19 @@ class _WelcomeRootScreenState extends State<WelcomeRootScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Material(
+                      InkWell(
                         borderRadius: BorderRadius.circular(100),
-                        color: theme.colorScheme.tertiary,
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(100),
-                          onTap: () {
-                            _pageController.previousPage(
-                              duration: Duration(milliseconds: 600),
-                              curve: Curves.ease,
-                            );
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 60,
-                            width: 60,
-                            child: Image.asset('images/сommon/icons/left.png'),
-                          ),
+                        onTap: () {
+                          _pageController.previousPage(
+                            duration: Duration(milliseconds: 600),
+                            curve: Curves.ease,
+                          );
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 60,
+                          width: 60,
+                          child: Image.asset('images/welcome/to_left.png'),
                         ),
                       ),
                       Row(
@@ -80,32 +69,28 @@ class _WelcomeRootScreenState extends State<WelcomeRootScreen> {
                             return CircleAvatar(
                               radius: 7,
                               backgroundColor: index == _currentPageIndex
-                                  ? theme.colorScheme.tertiaryFixed
-                                  : theme.colorScheme.tertiary,
+                                  ? theme.colorScheme.scrim
+                                  : theme.colorScheme.surface,
                             );
                           }),
                         ],
                       ),
-                      Material(
+                      InkWell(
                         borderRadius: BorderRadius.circular(100),
-                        color: theme.colorScheme.tertiary,
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(100),
-                          onTap: () {
-                            _pageController.nextPage(
-                              duration: Duration(milliseconds: 600),
-                              curve: Curves.ease,
-                            );
-                            if (_pageController.page == _screens.length - 1) {
-                              Navigator.of(context).pushReplacementNamed('/auth');
-                            }
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 60,
-                            width: 60,
-                            child: Image.asset('images/сommon/icons/right.png'),
-                          ),
+                        onTap: () {
+                          _pageController.nextPage(
+                            duration: Duration(milliseconds: 600),
+                            curve: Curves.ease,
+                          );
+                          if (_pageController.page == _screens.length - 1) {
+                            Navigator.of(context).pushReplacementNamed('/auth');
+                          }
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 60,
+                          width: 60,
+                          child: Image.asset('images/welcome/to_right.png'),
                         ),
                       ),
                     ],

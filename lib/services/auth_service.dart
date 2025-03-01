@@ -8,23 +8,26 @@ class AuthService {
     required String password,
     required String fullName,
     required String birthdate,
-    required String gender
+    required String gender,
+    required bool isAdmin,
   }) async {
     try {
       final response = await _supabaseClient.auth.signUp(
-          email: email,
-          password: password,
-          data: {
-            'fullName': fullName,
-            'birthdate': birthdate,
-            'gender': gender,
-          },
+        email: email,
+        password: password,
+        data: {
+          'fullName': fullName,
+          'birthdate': birthdate,
+          'gender': gender,
+          'isAdmin': isAdmin,
+        },
       );
       return response;
-    } catch(e) {
-      throw Exception(e.toString());
+    } catch (e) {
+      throw Exception('Ошибка регистрации: $e');
     }
   }
+
 
   Future<AuthResponse> registerEmployee({
     required String email,
@@ -48,7 +51,7 @@ class AuthService {
         },
       );
       return response;
-    } catch(e) {
+    } catch (e) {
       throw Exception(e.toString());
     }
   }
@@ -59,12 +62,12 @@ class AuthService {
   }) async {
     try {
       final response = await _supabaseClient.auth.signInWithPassword(
-          email: email,
-          password: password
+        email: email,
+        password: password,
       );
       return response;
-    } catch(e) {
-      throw e;
+    } catch (e) {
+      throw Exception(e);
     }
   }
 

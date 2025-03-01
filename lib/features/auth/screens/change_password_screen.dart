@@ -161,7 +161,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             height: 55,
                             width: double.infinity,
                             child: MyButton(
-                              backgroundColor: theme.colorScheme.tertiary,
+                              backgroundColor: theme.colorScheme.surface,
                               foregroundColor: theme.colorScheme.onSurface,
                               title: 'Назад',
                               onPressed: () {

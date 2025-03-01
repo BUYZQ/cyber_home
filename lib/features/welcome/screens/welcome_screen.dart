@@ -14,7 +14,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>  with TickerProviderState
 
   @override
   void initState() {
-
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 3),
@@ -32,6 +31,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>  with TickerProviderState
       );
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override

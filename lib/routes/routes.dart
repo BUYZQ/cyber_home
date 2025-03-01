@@ -8,7 +8,6 @@ import 'package:cyber_app/features/drawer/screens/license_screen.dart';
 import 'package:cyber_app/features/drawer/screens/teachers_screen.dart';
 import 'package:cyber_app/features/home/screens/home_screen.dart';
 import 'package:cyber_app/features/home/screens/search_screen.dart';
-import 'package:cyber_app/features/profile/screens/profile_edit_screen.dart';
 import 'package:cyber_app/features/profile/screens/profile_screeen.dart';
 import 'package:cyber_app/features/settings/screens/settings_screen.dart';
 import 'package:cyber_app/features/welcome/screens/welcome_home_screen.dart';

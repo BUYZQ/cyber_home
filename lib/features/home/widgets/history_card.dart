@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 class HistoryCard extends StatelessWidget {
+  final bool isNotRead;
+  final String imagePath;
+
   const HistoryCard({
     super.key,
+    this.isNotRead = true,
+    required this.imagePath,
   });
 
   @override
@@ -12,21 +17,25 @@ class HistoryCard extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       child: Column(
         children: [
-          Container(
-            padding: EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-              border: Border.all(
-                color: theme.colorScheme.onSurface,
-                width: 3,
-              ),
-            ),
+          InkWell(
+            onTap: () {},
+            borderRadius: BorderRadius.circular(100),
             child: Container(
-              height: 100,
-              width: 100,
+              padding: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                color: theme.colorScheme.surface,
+                border: Border.all(
+                  color: isNotRead ? theme.colorScheme.scrim : Colors.transparent ,
+                  width: 3,
+                ),
+              ),
+              child: Container(
+                height: 100,
+                width: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                child: Image.asset(imagePath),
               ),
             ),
           ),

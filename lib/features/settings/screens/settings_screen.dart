@@ -1,3 +1,4 @@
+import 'package:cyber_app/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -46,7 +47,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           color: theme.colorScheme.surface,
                         ),
                       ),
-                      SizedBox(width: 30),
+                      IconButton(
+                        color: theme.colorScheme.surface,
+                        onPressed: _signOut,
+                        icon: Icon(Icons.exit_to_app),
+                      ),
                     ],
                   ),
                 ),
@@ -185,5 +190,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         },
       ),
     );
+  }
+
+  Future<void> _signOut() async {
+    try {
+      await AuthService().signOut();
+      Navigator.of(context).pushNamed('/auth');
+   } catch(e) {
+     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error server')));
+   }
   }
 }

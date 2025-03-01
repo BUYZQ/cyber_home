@@ -32,6 +32,7 @@ class MyButton extends StatelessWidget {
         title,
         style: theme.textTheme.labelSmall?.copyWith(
           fontSize: 18,
+          color: foregroundColor,
         ),
       ),
     );

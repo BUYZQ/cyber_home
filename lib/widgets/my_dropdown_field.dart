@@ -1,24 +1,39 @@
 import 'package:flutter/material.dart';
 
-class MyDropdownField extends StatelessWidget {
+class MyDropdownField extends StatefulWidget {
   const MyDropdownField({
     super.key,
     required String? selectedGender,
     this.validator,
     required this.hint,
+    this.onChanged,
   }) : _selectedGender = selectedGender;
 
   final String? _selectedGender;
   final String hint;
   final String? Function(String?)? validator;
+  final void Function(String?)? onChanged;
+
+  @override
+  State<MyDropdownField> createState() => _MyDropdownFieldState();
+}
+
+class _MyDropdownFieldState extends State<MyDropdownField> {
+  String? _selectedValue;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedValue = widget._selectedGender;
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return DropdownButtonFormField(
-      validator: validator,
+      validator: widget.validator,
       hint: Text(
-        hint,
+        widget.hint,
         style: theme.textTheme.labelSmall?.copyWith(
           fontSize: 18,
           color: theme.colorScheme.secondary,
@@ -52,7 +67,7 @@ class MyDropdownField extends StatelessWidget {
           ),
         ),
       ),
-      value: _selectedGender,
+      value: widget._selectedGender,
       items: [
         DropdownMenuItem(
           value: 'Женский',
@@ -63,7 +78,12 @@ class MyDropdownField extends StatelessWidget {
           child: Text('Мужской'),
         ),
       ],
-      onChanged: (value) {},
+      onChanged: (value) {
+        setState(() {
+          _selectedValue = value;
+        });
+        widget.onChanged!(value);
+      },
     );
   }
 }

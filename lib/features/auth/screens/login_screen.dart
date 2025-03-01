@@ -1,6 +1,7 @@
 import 'package:cyber_app/features/auth/widgets/login_employee_block.dart';
 import 'package:cyber_app/features/auth/widgets/login_student_block.dart';
 import 'package:cyber_app/features/auth/widgets/my_select_button.dart';
+import 'package:cyber_app/services/auth_service.dart';
 import 'package:cyber_app/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 
@@ -35,6 +36,8 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordController.dispose();
     super.dispose();
   }
+
+  final _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: MySelectButton(
                                         title: 'Обучающийся',
                                         isSelected: _selected == 'Обучающийся',
-                                        onPressed: () => _onSelect('Обучающийся'),
+                                        onPressed: () =>
+                                            _onSelect('Обучающийся'),
                                       ),
                                     ),
                                   ),
@@ -113,19 +117,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ],
                               ),
                               _selected == 'Обучающийся'
-                                  ? LoginStudentBlock(
-                                emailController: _emailController,
-                                passwordController: _passwordController,
-                                formKey: _formKey,
-                              )
+                                  ? LoginStudentBlock()
                                   : LoginEmployeeBlock(
-                                emailController: _emailController,
-                                passwordController: _passwordController,
-                                formKey: _formKey,
-                              ),
+                                      emailController: _emailController,
+                                      passwordController: _passwordController,
+                                      formKey: _formKey,
+                                    ),
                             ],
                           ),
-                          SizedBox(height: 100),
+                          SizedBox(height: 80),
                           Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: SizedBox(

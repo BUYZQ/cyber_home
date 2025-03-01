@@ -1,6 +1,10 @@
+import 'dart:io';
 import 'package:cyber_app/features/profile/widget/edit_field.dart';
+import 'package:cyber_app/providers/user_image_provider.dart';
 import 'package:cyber_app/widgets/my_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -25,6 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final imageProvider = Provider.of<UserImageProvider>(context);
     final theme = Theme.of(context);
     return Scaffold(
       drawer: MyDrawer(currentScreen: 'Профиль'),
@@ -82,46 +87,62 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       horizontal: 20.0, vertical: 30),
                   child: Column(
                     children: [
-                      InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(100),
-                        child: Stack(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(6),
+                      Stack(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(
+                                width: 3,
+                                color: theme.colorScheme.primaryFixed,
+                              ),
+                            ),
+                            child: Material(
+                              borderRadius: BorderRadius.circular(100),
+                              color: theme.colorScheme.surface,
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(100),
+                                onTap: imageProvider.getImage,
+                                child: Container(
+                                  height: 120,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                  child: imageProvider.image == null
+                                      ? Icon(
+                                          Icons.person,
+                                          size: 100,
+                                          color: theme.colorScheme.primaryFixed,
+                                        )
+                                      : ClipRRect(
+                                          borderRadius: BorderRadius.circular(100),
+                                          child: Image.file(
+                                            imageProvider.image!,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: Container(
+                              padding: EdgeInsets.all(2),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
-                                border: Border.all(
-                                  width: 3,
-                                  color: theme.colorScheme.onSurface,
-                                ),
+                                color: theme.colorScheme.surface,
                               ),
-                              child: Container(
-                                height: 120,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: theme.colorScheme.tertiary,
-                                ),
+                              child: Image.asset(
+                                'images/profile/edit.png',
+                                scale: 1.3,
                               ),
                             ),
-                            Positioned(
-                              bottom: 0,
-                              right: 0,
-                              child: Container(
-                                padding: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: theme.colorScheme.surface,
-                                ),
-                                child: Image.asset(
-                                  'images/profile/edit.png',
-                                  scale: 1.3,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: 20),
                       EditField(

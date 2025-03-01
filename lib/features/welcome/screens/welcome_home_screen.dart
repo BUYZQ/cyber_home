@@ -70,6 +70,14 @@ class _WelcomeHomeScreenState extends State<WelcomeHomeScreen>
                       child: Column(
                         children: [
                           SizedBox(height: 100),
+                          Text(
+                            textAlign: TextAlign.center,
+                            'Добро пожаловать',
+                            style: theme.textTheme.titleSmall?.copyWith(
+                              fontSize: 35,
+                              color: theme.colorScheme.surface,
+                            ),
+                          ),
                           Expanded(
                             child: Center(
                               child: Image.asset(

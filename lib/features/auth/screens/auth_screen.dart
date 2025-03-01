@@ -14,6 +14,12 @@ class _AuthScreenState extends State<AuthScreen> {
   bool _isLogin = true;
 
   @override
+  void didChangeDependencies() {
+    _isLogin = true;
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,

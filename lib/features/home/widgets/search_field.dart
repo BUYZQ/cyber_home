@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class SearchField extends StatelessWidget {
   final Function()? onTap;
+  final bool readOnly;
 
   const SearchField({
     super.key,
     this.onTap,
+    this.readOnly = false,
   });
 
   @override
@@ -13,6 +15,7 @@ class SearchField extends StatelessWidget {
     final theme = Theme.of(context);
     return TextField(
       onTap: onTap,
+      readOnly: readOnly,
       cursorColor: theme.colorScheme.onSurface,
       decoration: InputDecoration(
         filled: true,
